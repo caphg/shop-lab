@@ -1,5 +1,5 @@
 class Api::ProjectsController < ApplicationController
-  before_action :authenticate_user! 
+  before_action :authenticate_user!
   
   def index
     render json: current_user.projects.map { |project| ProjectSerializer.new(project, root: false) }.to_json
