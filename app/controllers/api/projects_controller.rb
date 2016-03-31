@@ -7,6 +7,7 @@ class Api::ProjectsController < ApplicationController
 
   def create
     new_project = Project.new new_project_params
+    new_project.user = current_user
 
     if new_project.save
       render json: ProjectSerializer.new(new_project, root: false)
@@ -30,12 +31,12 @@ class Api::ProjectsController < ApplicationController
   end
 
   def new_project_params
-    params.require(:project).permit(
+    params.permit(
       :name
     )
   end
 
   def update_note_params
-    params.require(:project).permit(:name)
+    params.permit(:name)
   end
 end
