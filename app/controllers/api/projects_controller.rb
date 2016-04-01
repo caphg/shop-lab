@@ -36,7 +36,7 @@ class Api::ProjectsController < ApplicationController
     )
   end
 
-  def update_note_params
+  def update_project_params
     params.permit(:name)
   end
 end
