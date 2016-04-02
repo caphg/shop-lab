@@ -25,6 +25,15 @@ class Api::ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    Project.includes(:users).where(projects: {id: item.project_id}, users: {id: current_user.id}).first or return render json: {}, status: 403
+    if item.destroy
+      render json: {}, status: 204
+    else
+      render json: {}, status: 422
+    end
+  end
+
   private
 
   def item
