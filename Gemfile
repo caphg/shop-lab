@@ -28,6 +28,8 @@ gem 'rails-api'
 gem 'devise_token_auth'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers'
+gem 'rails_12factor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
