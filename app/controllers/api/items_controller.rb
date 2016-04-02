@@ -8,6 +8,7 @@ class Api::ItemsController < ApplicationController
   def create
     new_item = Item.new new_item_params
     new_item.project = project
+    new_item.owner_id = current_user.id
 
     if new_item.save
       render json: ItemSerializer.new(new_item, root: false)
@@ -31,7 +32,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def project
-    Project.where(id: params[:project_id], user_id: current_user.id).first or raise Exception.new("Project not found")
+    Project.includes(:users).where(projects: {id: params[:project_id]}, users: {id: current_user.id}).first or raise Exception.new("Project not found")
   end
 
   def new_item_params

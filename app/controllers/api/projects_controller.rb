@@ -7,7 +7,7 @@ class Api::ProjectsController < ApplicationController
 
   def create
     new_project = Project.new new_project_params
-    new_project.user = current_user
+    new_project.users << current_user
 
     if new_project.save
       render json: ProjectSerializer.new(new_project, root: false)
@@ -24,10 +24,18 @@ class Api::ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    if project.destroy
+      render json: {}
+    else
+      render json: {errors: project.errors}
+    end
+  end
+
   private
 
   def project
-    @project = Project.find(params[:id]) or raise Exception.new("Project not found")
+    Project.includes(:users).where(projects: {id: params[:id]}, users: {id: current_user.id}).first or raise Exception.new("Project not found")
   end
 
   def new_project_params

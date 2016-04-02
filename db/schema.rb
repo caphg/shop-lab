@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401131007) do
+ActiveRecord::Schema.define(version: 20160402171108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "host_id"
+    t.integer  "invitee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invitations", ["project_id"], name: "index_invitations_on_project_id", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160401131007) do
     t.datetime "updated_at", null: false
     t.integer  "project_id"
     t.boolean  "done"
+    t.integer  "owner_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -32,6 +43,11 @@ ActiveRecord::Schema.define(version: 20160401131007) do
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "projects_users", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -62,5 +78,6 @@ ActiveRecord::Schema.define(version: 20160401131007) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "invitations", "projects"
   add_foreign_key "projects", "users"
 end
