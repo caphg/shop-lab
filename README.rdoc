@@ -1,6 +1,7 @@
 == Shop Lab Backend
 
 This is a backend written on Ruby on Rails stack for an example Shop Lab app which allows you to create and share shopping lists with your girlfriend/wife/soulmate.
+See frontend counterpart written in Ionic <a href="https://github.com/caphg/shop-lab-frontend">here</a>
 
 ## Stack
 ========
@@ -9,4 +10,5 @@ This is a backend written on Ruby on Rails stack for an example Shop Lab app whi
 
 - API implemented with `rails-api` gem and `active_model_serializers`
 - Token authentication via `devise_token_auth`
-- PostgresDB
+
+* PostgresDB
