@@ -1,7 +1,7 @@
 == Shop Lab Backend
 
 This is a backend written on Ruby on Rails stack for an example Shop Lab app which allows you to create and share shopping lists with your girlfriend/wife/soulmate.
-See frontend counterpart written in Ionic <a href="https://github.com/caphg/shop-lab-frontend">here</a>
+See frontend counterpart written in Ionic [here](https://github.com/caphg/shop-lab-frontend)
 
 ## Stack
 ========
