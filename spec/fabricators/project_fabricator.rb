@@ -1,4 +1,4 @@
 Fabricator(:project) do
   name { Faker::Name.name }
-  user { Fabricate(:user) }
+  users(count: 1)
 end
