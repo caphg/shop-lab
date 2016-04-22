@@ -22,7 +22,7 @@ class Api::InvitationsController < ApplicationController
   end
 
   def accept
-    invitation = Invitation.find(params[:id])
+    invitation = Invitation.find(params[:id]) or raise Exception.new("No such invitation")
     return render json: {}, :status => 403 unless invitation.invitee_id == current_user.id
     project = invitation.project
     return render json: {}, :status => 400 if User.includes(:projects).where(users: {id: current_user.id}, projects: {id: project.id}).count > 0
